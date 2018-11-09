@@ -2,8 +2,6 @@ package com.robence.videoplayer;
 
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -36,19 +34,17 @@ public class Main extends Application {
 
         fileChooser = new FileChooser();
 
-        open.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                player.player.pause();
-                File file = fileChooser.showOpenDialog(primaryStage);
-                if (file != null) {
-                    try {
-                        player = new Player(file.toURI().toURL().toExternalForm());
-                        Scene scene = new Scene(player, 720, 535, Color.BLACK);
-                        primaryStage.setScene(scene);
-                    } catch (MalformedURLException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+        open.setOnAction(e -> {
+            player.player.pause();
+            File file1 = fileChooser.showOpenDialog(primaryStage);
+            if (file1 != null) {
+                try {
+                    player = new Player(file1.toURI().toURL().toExternalForm());
+                    Scene scene = new Scene(player, 720, 535, Color.BLACK);
+                    primaryStage.setScene(scene);
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
                 }
             }
         });
