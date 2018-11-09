@@ -1,4 +1,4 @@
-package application;
+package com.robence.videoplayer;
 
 
 import javafx.application.Platform;
@@ -16,21 +16,17 @@ import javafx.scene.layout.Priority;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 
-public class MediaBar extends HBox{
-	
-	Slider time = new Slider();
-	Slider vol = new Slider();
-	
-	Button playButton = new Button("||");
-			
-	Label volume = new Label("Volume: ");
-	
-	MediaPlayer player;
-	
-	public MediaBar(MediaPlayer play){
+class MediaBar extends HBox {
+
+	private Slider time = new Slider();
+	private Slider vol = new Slider();
+
+	private Button playButton = new Button("||");
+
+	private MediaPlayer player;
+
+	MediaBar(MediaPlayer play) {
 		player = play;
-		
-		
 		
 		setAlignment(Pos.CENTER);
 		setPadding(new Insets(0,10,3,10));
@@ -45,6 +41,7 @@ public class MediaBar extends HBox{
 		
 		getChildren().add(playButton);
 		getChildren().add(time);
+		Label volume = new Label("Volume: ");
 		getChildren().add(volume);
 		getChildren().add(vol);
 		
@@ -96,8 +93,8 @@ public class MediaBar extends HBox{
 			}
 		});
 	}
-	
-	protected void updateValues(){
+
+	private void updateValues() {
 		Platform.runLater(new Runnable(){
 			public void run(){
 				time.setValue(player.getCurrentTime().toMillis()/player.getTotalDuration().toMillis()*100);

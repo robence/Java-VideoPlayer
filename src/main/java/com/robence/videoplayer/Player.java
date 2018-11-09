@@ -1,4 +1,4 @@
-package application;
+package com.robence.videoplayer;
 
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -7,23 +7,20 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
 public class Player extends BorderPane  {
-	
-	Media media;
+
 	MediaPlayer player;
-	MediaView view;
-	Pane mpane;
-	MediaBar bar;
+
 	public Player(String file){
-		media = new Media(file);
+		Media media = new Media(file);
 		player = new MediaPlayer(media);
-		view = new MediaView(player);
-		mpane = new Pane();
-		
-		mpane.getChildren().add(view);
-		
-		setCenter(mpane);
-		
-		bar = new MediaBar(player);
+		MediaView view = new MediaView(player);
+		Pane pane = new Pane();
+
+		pane.getChildren().add(view);
+
+		setCenter(pane);
+
+		MediaBar bar = new MediaBar(player);
 		
 		setBottom(bar);
 		
