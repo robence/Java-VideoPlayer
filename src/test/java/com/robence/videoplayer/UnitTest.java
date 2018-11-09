@@ -2,9 +2,10 @@ package com.robence.videoplayer;
 
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertTrue;
 
-public class SmokeTest {
+public class UnitTest {
+
     @Test
     public void smokeTest() {
         assertTrue(true);
