@@ -8,42 +8,37 @@ import javafx.scene.media.MediaView;
 
 public class Player extends BorderPane {
 
-    MediaPlayer player;
+    private MediaPlayer player;
 
     public Player() {
-        //Media media = new Media(file);
-        //player = new MediaPlayer(media);
-        MediaView view = new MediaView();
-        Pane pane = new Pane();
-
-        pane.getChildren().add(view);
-
-        setCenter(pane);
-
-        MediaBar bar = new MediaBar();
-
-        setBottom(bar);
-
-        setStyle("-fx-background-color: #bfc2c7");
+        player();
     }
 
     public Player(String file) {
         Media media = new Media(file);
         player = new MediaPlayer(media);
-        MediaView view = new MediaView(player);
-        Pane pane = new Pane();
-
-        pane.getChildren().add(view);
-
-        setCenter(pane);
-
-        MediaBar bar = new MediaBar(player);
-
-        setBottom(bar);
-
-        setStyle("-fx-background-color: #bfc2c7");
+        player();
 
         player.play();
+
+    }
+
+    private void player() {
+
+        MediaView view = player != null
+                ? new MediaView(player)
+                : new MediaView();
+
+        Pane pane = new Pane();
+        pane.getChildren().add(view);
+        setCenter(pane);
+
+        MediaBar bar = player != null
+                ? new MediaBar(player)
+                : new MediaBar();
+
+        setBottom(bar);
+        setStyle("-fx-background-color: #bfc2c7");
 
     }
 

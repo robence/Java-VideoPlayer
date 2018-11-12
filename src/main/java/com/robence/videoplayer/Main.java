@@ -25,32 +25,39 @@ public class Main extends Application {
 
         MenuBar menuBar = new MenuBar();
         Menu menu = new Menu("File");
-        MenuItem menuItem = new MenuItem("Open");
+        MenuItem openFile = new MenuItem("Open");
 
-        menu.getItems().add(menuItem);
+        menu.getItems().add(openFile);
         menuBar.getMenus().add(menu);
 
         fileChooser = new FileChooser();
 
-        menuItem.setOnAction(e -> {
+        addOpenFIleEventListener(primaryStage, menuBar, openFile);
+
+        player = new Player();
+        setStage(primaryStage, menuBar);
+        primaryStage.show();
+    }
+
+    private void addOpenFIleEventListener(Stage primaryStage, MenuBar menuBar, MenuItem openFile) {
+        openFile.setOnAction(e -> {
             File file = fileChooser.showOpenDialog(primaryStage);
             if (file != null) {
                 try {
                     player = new Player(file.toURI().toURL().toExternalForm());
-                    Scene scene = new DefaultScene(player);
-                    primaryStage.setScene(scene);
+                    setStage(primaryStage, menuBar);
                 } catch (MalformedURLException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
         });
+    }
 
-        player = new Player();
+    private void setStage(Stage primaryStage, MenuBar menuBar) {
         player.setTop(menuBar);
         Scene scene = new DefaultScene(player);
         primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
 

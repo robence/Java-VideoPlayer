@@ -22,29 +22,16 @@ class MediaBar extends HBox {
     private MediaPlayer player;
 
     MediaBar() {
-        setAlignment(Pos.CENTER);
-        setPadding(new Insets(0, 10, 3, 10));
-
-        vol.setPrefWidth(70);
-        vol.setMinWidth(30);
-        vol.setValue(100);
-
-        HBox.setHgrow(time, Priority.ALWAYS);
-
-        playButton.setPrefWidth(30);
-
-        getChildren().add(playButton);
-        getChildren().add(time);
-        Label volume = new Label("Volume: ");
-        getChildren().add(volume);
-        getChildren().add(vol);
-
-
+        init();
     }
 
     MediaBar(MediaPlayer play) {
         player = play;
+        init();
+        addEventListeners();
+    }
 
+    private void init() {
         setAlignment(Pos.CENTER);
         setPadding(new Insets(0, 10, 3, 10));
 
@@ -61,8 +48,15 @@ class MediaBar extends HBox {
         Label volume = new Label("Volume: ");
         getChildren().add(volume);
         getChildren().add(vol);
+    }
 
+    private void updateValues() {
+        Platform.runLater(() -> {
+            time.setValue(player.getCurrentTime().toMillis() / player.getTotalDuration().toMillis() * 100);
+        });
+    }
 
+    private void addEventListeners() {
         playButton.setOnAction(e -> {
             Status status = player.getStatus();
 
@@ -94,12 +88,6 @@ class MediaBar extends HBox {
             if (vol.isPressed()) {
                 player.setVolume(vol.getValue() / 100);
             }
-        });
-    }
-
-    private void updateValues() {
-        Platform.runLater(() -> {
-            time.setValue(player.getCurrentTime().toMillis() / player.getTotalDuration().toMillis() * 100);
         });
     }
 }
