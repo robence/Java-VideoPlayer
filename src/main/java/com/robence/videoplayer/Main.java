@@ -33,7 +33,6 @@ public class Main extends Application {
         fileChooser = new FileChooser();
 
         menuItem.setOnAction(e -> {
-            player.player.pause();
             File file = fileChooser.showOpenDialog(primaryStage);
             if (file != null) {
                 try {
@@ -47,7 +46,7 @@ public class Main extends Application {
             }
         });
 
-        player = new Player("file:///C:/trailer.mp4");
+        player = new Player();
         player.setTop(menuBar);
         Scene scene = new DefaultScene(player);
         primaryStage.setScene(scene);

@@ -10,6 +10,23 @@ public class Player extends BorderPane {
 
     MediaPlayer player;
 
+    public Player() {
+        //Media media = new Media(file);
+        //player = new MediaPlayer(media);
+        MediaView view = new MediaView();
+        Pane pane = new Pane();
+
+        pane.getChildren().add(view);
+
+        setCenter(pane);
+
+        MediaBar bar = new MediaBar();
+
+        setBottom(bar);
+
+        setStyle("-fx-background-color: #bfc2c7");
+    }
+
     public Player(String file) {
         Media media = new Media(file);
         player = new MediaPlayer(media);

@@ -21,6 +21,27 @@ class MediaBar extends HBox {
 
     private MediaPlayer player;
 
+    MediaBar() {
+        setAlignment(Pos.CENTER);
+        setPadding(new Insets(0, 10, 3, 10));
+
+        vol.setPrefWidth(70);
+        vol.setMinWidth(30);
+        vol.setValue(100);
+
+        HBox.setHgrow(time, Priority.ALWAYS);
+
+        playButton.setPrefWidth(30);
+
+        getChildren().add(playButton);
+        getChildren().add(time);
+        Label volume = new Label("Volume: ");
+        getChildren().add(volume);
+        getChildren().add(vol);
+
+
+    }
+
     MediaBar(MediaPlayer play) {
         player = play;
 
